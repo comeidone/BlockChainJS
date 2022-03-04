@@ -46,6 +46,7 @@ async function getAccount() {
     document.querySelector("#accountAddress").innerText = "Account: ";
     showAccount.innerHTML = account;
     document.querySelector("#infoCard").classList.remove('hidden');
+    document.querySelector("#valueApp").classList.remove('hidden');
     document.querySelector("#copyIcon").classList.remove('hidden');
     document.querySelector('#metaMaskNotification').classList.add('hidden');
 
@@ -71,6 +72,7 @@ function resetConnectionForm() {
     connectionButton.innerText = "Connetti";
     document.querySelector("#accountAddress").innerText = "Nessun account connesso";
     document.querySelector("#infoCard").classList.add('hidden');
+    document.querySelector("#valueApp").classList.add('hidden');
     document.querySelector('#metaMaskNotification').classList.add('hidden');
 
 }
