@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="tilestyle.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./node_modules/web3/dist/web3.min.js"></script>
+    <title>Web3</title>
+
+</head>
+
+<body>
+    <svg id="metaMaskNotification" class="hidden absolute right-11 my-2 animate-bounce h-8 w-8 text-orange-500"
+        width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+        stroke-linecap="round" stroke-linejoin="round">
+        <path stroke="none" d="M0 0h24v24H0z" />
+        <circle cx="12" cy="12" r="9" />
+        <line x1="12" y1="8" x2="8" y2="12" />
+        <line x1="12" y1="8" x2="12" y2="16" />
+        <line x1="16" y1="12" x2="12" y2="8" />
+    </svg>
+    <div class="container mx-auto">
+        <div id="metaMaskConnection" class="w-full p-4">
+            <div class="p-8 rounded-xl shadow-md">
+                <div class="flex">
+                    <h4 class="mb-2 text-lg font-semibold">Benvenuto, connettiti al tuo wallet MetaMask</h4>
+                    <img class="object-contain h-7 inline ml-3"
+                        src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg"></img>
+                </div>
+                <button id="connectionButton"
+                    class="my-4 px-4 py-2 block w-full text-white bg-blue-500 hover:bg-blue-700 rounded enableEthereumButton">Connetti</button>
+                <p class="text-base mb-2"><span id="accountAddress">Nessun account connesso</span><span
+                        class="showAccount"></span>
+                    <span id="copyIcon" class="hidden"><svg class="h-4 w-4 text-gray-500 hover:text-black inline"
+                            width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" />
+                            <rect x="8" y="8" width="12" height="12" rx="2" />
+                            <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+                        </svg></span>
+                    <span id="copied" class="hidden text-xs text-gray-500">Copiato</span>
+                </p>
+                <div id="accountLink" class="flex flex-wrap items-center">
+                    <p class="text-gray-500 text-xs"> Se non hai un account MetaMask crealo cliccando <a
+                            href="https://metamask.io/" target="_blank"
+                            class="border-b-2 border-gray-500 hover:text-black hover:border-blue-700">qui</a> e scarica
+                        l'estensone per il tuo browser</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="infoCard" class="w-full p-4 hidden">
+            <div class="p-8 rounded-xl shadow-md">
+                <h4 class="mb-2 text-lg font-semibold">
+                    Assicurati di essere connesso alla Rete di test Ropsten ed avere rETH nel tuo wallet</h4>
+                <p class="text-gray-500 text-xs">
+                    Ricorda che se non possiedi rETH puoi riceverli gratuitamente dai Ropsten faucest online:</p>
+                <ul class="text-gray-500 text-xs list-disc list-inside">
+                    <li class="w-fit hover:text-black"><a href="https://faucet.metamask.io/" target="_blank">MetaMask
+                            Ether Faucet</a></li>
+                    <li class="w-fit hover:text-black"><a href="https://faucet.dimensions.network/"
+                            target="_blank">Ropsten Ethereum (rETH) Faucet</a></li>
+                    <li class="w-fit hover:text-black"><a href="https://faucet.egorfine.com/" target="_blank">Ropsten
+                            testnet faucet</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="p-8 rounded-xl shadow-md">
+            <div id="valueCard" class="w-full p-4">
+                <h4 class="mb-2 text-lg font-semibold">
+                    Cambia il valore numerico sulla Blockchain
+                </h4>
+                <p class="text-base mb-2">
+                    Il attuale valore è: <span id="valueBlock"></span>
+                </p>
+                <form>
+                    <div class="mb-4">
+                      <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
+                        Inserisci un nuovo valore numerico e salvalo nella Block Chain
+                      </label>
+                      <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="newValueBlock" type="number" value="0" min="0" max="115792089237316195423570985008687907853269984665640564039457584007913129639935">
+                    </div>
+                    <div class="flex items-center justify-between">
+                      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="saveButton">
+                        Salva
+                      </button>
+                    </div>
+                  </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script src="metmaskProvider.js"></script>
+</body>
+
+</html>
