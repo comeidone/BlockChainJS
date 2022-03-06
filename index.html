@@ -27,7 +27,7 @@
                 <div class="flex">
                     <h4 class="mb-2 text-lg font-semibold">Benvenuto, connettiti al tuo wallet MetaMask</h4>
                     <img class="object-contain h-7 inline ml-3"
-                        src="https://upload.wikimedia.org/wikipedia/commons/3/36/MetaMask_Fox.svg"></img>
+                        src="./images/MetaMask_Fox.svg"></img>
                 </div>
                 <button id="connectionButton"
                     class="my-4 px-4 py-2 block w-full text-white bg-blue-500 hover:bg-blue-700 rounded enableEthereumButton">Connetti</button>
@@ -67,25 +67,34 @@
                 </ul>
             </div>
         </div>
-        <div id="valueApp" class="p-8 rounded-xl shadow-md hidden">
-            <div id="valueCard" class="w-full p-4">
+        <div id="valueApp" class="w-full p-4 hidden">
+            <div class="p-8 rounded-xl shadow-md">
                 <h4 class="mb-2 text-lg font-semibold">
                     Cambia il valore numerico sulla Blockchain
                 </h4>
                 <p class="text-base mb-2">
-                    Il attuale valore è: <span id="valueBlock"></span>
+                    Il attuale valore è: <span id="valueBlock" class="font-bold bg-blue-100 p-2 rounded-lg border-2 border-blue-500"></span>
                 </p>
-                <form>
+                <form autocomplete="off">
                     <div class="mb-4">
                       <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
                         Inserisci un nuovo valore numerico e salvalo nella Block Chain
                       </label>
-                      <input class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="newValueBlock" type="number" value="0" min="0" max="115792089237316195423570985008687907853269984665640564039457584007913129639935">
+                      <input id="newValueBlock" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="number" value="0" min="0" max="115792089237316195423570985008687907853269984665640564039457584007913129639935">
                     </div>
-                    <div class="flex items-center justify-between">
-                      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button" id="saveButton">
-                        Salva
+                    <div>
+                      <button id="saveButton" class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <span id="saveText">Salva</span>
+                        <svg id="loadSpinner" class="hidden animate-spin h-5 w-5 rounded-full bg-transparent border-2 border-white border-opacity-20" style="border-right-color: white; border-top-color: white;" viewBox="0 0 24 24"></svg>
+                        <span id="processingText" class="ml-3 hidden">Processing...</span>
                       </button>
+                    </div>
+                    <div id="saveValueError" class="hidden bg-red-200 py-2 pl-2 my-2 text-red-900 rounded-lg">
+                        ERRORE: <span id="errorValue"></span>
+                    </div>
+                    <div id="saveValueSuccess" class="hidden bg-green-200 py-2 pl-2 my-2 text-green-900 rounded-lg">
+                        Transazione completata con successo. Attendi l'aggiornamento del valore.<br/>
+                        ID Transazione: <span id="successValue"></span>
                     </div>
                   </form>
             </div>

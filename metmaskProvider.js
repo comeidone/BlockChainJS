@@ -27,6 +27,7 @@ ethereumButton.addEventListener('click', () => {
     getAccount();
 });
 
+//recupero l'account in modo asincrono
 async function getAccount() {
     const accounts = await ethereum.request({ method: 'eth_requestAccounts' })
         .catch((err) => {
@@ -52,6 +53,7 @@ async function getAccount() {
 
 }
 
+//verifico i cambiamenti di stato dell'account
 if (typeof window.ethereum !== 'undefined') {
     ethereum.on('accountsChanged', function (accounts) {
         if (accounts.length != 0) {
@@ -62,6 +64,7 @@ if (typeof window.ethereum !== 'undefined') {
     });
 }
 
+//resetto i valori in pagina
 function resetConnectionForm() {
     connectionButton.classList.add('bg-blue-500');
     connectionButton.classList.add('hover:bg-blue-700');
@@ -74,5 +77,9 @@ function resetConnectionForm() {
     document.querySelector("#infoCard").classList.add('hidden');
     document.querySelector("#valueApp").classList.add('hidden');
     document.querySelector('#metaMaskNotification').classList.add('hidden');
-
+    document.querySelector("#saveValueSuccess").classList.add('hidden');
+    document.querySelector("#saveValueError").classList.add('hidden');
+    document.querySelector('#errorValue').innerText = "";
+    document.querySelector('#successValue').innerText = "";
+    document.querySelector('#newValueBlock').value = 0;
 }
