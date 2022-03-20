@@ -1,27 +1,26 @@
-const provider = new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/886a05166e87407dba7baaf8d6b3b504");
-const web3 = new Web3(provider);
-const abi = [{ "inputs": [], "name": "retrieve", "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }], "stateMutability": "view", "type": "function" }, { "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }], "name": "store", "outputs": [], "stateMutability": "nonpayable", "type": "function" }];
-const contractAddress = '0x799A643C8f1ff1aE1b377244D82EBD9640cDed72';
+const providerMOW = new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/33c3766edddb4fad9108f5c768cc5266");
+const web3MOW = new Web3(providerMOW);
+const abiMOW = [{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"oldOwner","type":"address"},{"indexed":true,"internalType":"address","name":"newOwner","type":"address"}],"name":"OwnerSet","type":"event"},{"inputs":[{"internalType":"address","name":"newOwner","type":"address"}],"name":"changeOwner","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[],"name":"getBalance","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"getOwner","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"readMessage","outputs":[{"internalType":"string","name":"","type":"string"},{"internalType":"string","name":"","type":"string"},{"internalType":"address","name":"","type":"address"},{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"},{"inputs":[],"name":"withdraw","outputs":[],"stateMutability":"nonpayable","type":"function"},{"inputs":[{"internalType":"string","name":"_message","type":"string"},{"internalType":"string","name":"_author","type":"string"}],"name":"writeMessage","outputs":[],"stateMutability":"payable","type":"function"}];
+const contractAddressMOW = '0xd50b2bf9E69BC6Fba69C4697619f77b2279eB101';
 
 //verifico connessione
 web3.eth.net.isListening()
-    .then(() => console.log('Value is connected'))
+    .then(() => console.log('MessageOnTheWall is connected'))
     .catch(e => console.log('Something went wrong'));
 
-const contract = new web3.eth.Contract(abi, contractAddress);
+const contractMOW = new web3.eth.Contract(abiMOW, contractAddressMOW);
 
 //recupero valore attuale
-contract.methods.retrieve().call()
-    .then((value) => document.querySelector('#valueBlock').innerText = value);
+contractMOW.methods.readMessage().call()
+    .then((value) => {
+        document.querySelector("#textMessage").innerText=value[0];
+        document.querySelector("#authorMessage").innerText=value[1];
+        document.querySelector("#addressMessage").innerText=value[2];
+        console.log(value[3]);
+        document.querySelector("#timeMessage").innerText=new Date(value[3]*1000).toLocaleDateString("it-IT") +" "+new Date(value[3]*1000).toLocaleTimeString("it-IT");
+    });
 
-//avviso di copia dell'indirizzo
-document.querySelector("#copyIcon").addEventListener('click', () => {
-    let copyText = document.querySelector(".showAccount").innerText;
-    navigator.clipboard.writeText(copyText);
-    document.querySelector("#copied").classList.remove('hidden');
-    setTimeout(function () { document.querySelector("#copied").classList.add('hidden') }, 750);
-});
-
+/*
 //click su Salva
 document.querySelector("#saveButton").addEventListener('click', async () => {
     let newValueBlock = document.querySelector("#newValueBlock").value;
@@ -94,4 +93,4 @@ document.querySelector("#saveButton").addEventListener('click', async () => {
     });
 
 })
-
+*/

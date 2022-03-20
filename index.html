@@ -22,6 +22,7 @@
         <line x1="16" y1="12" x2="12" y2="8" />
     </svg>
     <div class="container mx-auto">
+        <!--CONNECTION-->
         <div id="metaMaskConnection" class="w-full p-4">
             <div class="p-8 rounded-xl shadow-md">
                 <div class="flex">
@@ -50,7 +51,7 @@
                 </div>
             </div>
         </div>
-
+        <!--INFO ROPSTEN-->
         <div id="infoCard" class="w-full p-4 hidden">
             <div class="p-8 rounded-xl shadow-md">
                 <h4 class="mb-2 text-lg font-semibold">
@@ -67,18 +68,19 @@
                 </ul>
             </div>
         </div>
+        <!--CHANGE VALUE-->
         <div id="valueApp" class="w-full p-4 hidden">
             <div class="p-8 rounded-xl shadow-md">
                 <h4 class="mb-2 text-lg font-semibold">
                     Cambia il valore numerico sulla Blockchain
                 </h4>
                 <p class="text-base mb-2">
-                    Il attuale valore è: <span id="valueBlock" class="font-bold bg-blue-100 p-2 rounded-lg border-2 border-blue-500"></span>
+                    Il valore attuale è: <span id="valueBlock" class="font-bold bg-blue-100 p-2 rounded-lg border-2 border-blue-500"></span>
                 </p>
                 <form autocomplete="off">
                     <div class="mb-4">
                       <label class="block text-gray-700 text-sm font-bold mb-2" for="username">
-                        Inserisci un nuovo valore numerico e salvalo nella Block Chain
+                        Inserisci un nuovo valore numerico e salvalo nella Blockchain
                       </label>
                       <input id="newValueBlock" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"  type="number" value="0" min="0" max="115792089237316195423570985008687907853269984665640564039457584007913129639935">
                     </div>
@@ -99,9 +101,53 @@
                   </form>
             </div>
         </div>
+        <!--WRITE MESSAGE-->
+        <div id="messageApp" class="w-full p-4 hidden">
+            <div class="p-8 rounded-xl shadow-md">
+                <h4 class="mb-2 text-lg font-semibold">
+                    Cambia il messaggio scritto sulla Blockchain
+                </h4>
+                <p class="text-base mb-2">
+                    Il messaggio attuale è:
+                </p>
+                <div id="messageBlock" class="flex-col bg-blue-50 p-2 rounded-lg">
+                    <div class="text-center text-3xl italic font-serif">"<span id="textMessage"></span>"</div>
+                    <div class="text-right text-base font-sans text-sky-800"><span id="authorMessage"></span> </div>
+                    <div class="text-right text-xs font-mono text-neutral-400"><span id="addressMessage"></span></div>
+                    <div class="text-right text-xs font-mono text-neutral-400"><span id="timeMessage"></span></div>
+                </div>
+                <form autocomplete="off">
+                    <div class="mb-4">
+                      <label class="block text-gray-700 text-sm font-bold mt-3 mb-2" for="username">
+                        Inserisci un nuovo messaggio nella Blockchain:
+                      </label>
+                      <textarea id="newMessageBlock" class="w-full px-3 py-1.5 shadow appearance-none border border-solid border-gray-300 rounded focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" placeholder="Il tuo messaggio"></textarea>
+                      <label class="block text-gray-700 text-sm font-bold mt-3 mb-2" for="username">
+                        Inserisci l'autore del messaggio:
+                      </label>
+                      <input id="newAuthorBlock" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Autore">
+                    </div>
+                    <div>
+                      <button id="saveMessageButton" class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+                        <span id="saveMessageText">Salva</span>
+                        <svg id="messageLoadSpinner" class="hidden animate-spin h-5 w-5 rounded-full bg-transparent border-2 border-white border-opacity-20" style="border-right-color: white; border-top-color: white;" viewBox="0 0 24 24"></svg>
+                        <span id="messageProcessingText" class="ml-3 hidden">Processing...</span>
+                      </button>
+                    </div>
+                    <div id="saveMessageError" class="hidden bg-red-200 py-2 pl-2 my-2 text-red-900 rounded-lg">
+                        ERRORE: <span id="errorValue"></span>
+                    </div>
+                    <div id="saveMessageSuccess" class="hidden bg-green-200 py-2 pl-2 my-2 text-green-900 rounded-lg">
+                        Transazione completata con successo. Attendi l'aggiornamento del Messaggio.<br/>
+                        ID Transazione: <span id="successValue"></span>
+                    </div>
+                  </form>
+            </div>
+        </div>
     </div>
     <script src="script.js"></script>
     <script src="metmaskProvider.js"></script>
+    <script src="messageOnWall.js"></script>
 </body>
 
 </html>
