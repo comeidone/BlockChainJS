@@ -126,6 +126,9 @@
                         Inserisci l'autore del messaggio:
                       </label>
                       <input id="newAuthorBlock" class="shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" type="text" placeholder="Autore">
+                      <label class="block text-gray-700 text-sm font-bold mt-3 mb-2" for="username">
+                        Costo della transazione 0.00001 rETH
+                      </label>
                     </div>
                     <div>
                       <button id="saveMessageButton" class="flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
@@ -135,11 +138,11 @@
                       </button>
                     </div>
                     <div id="saveMessageError" class="hidden bg-red-200 py-2 pl-2 my-2 text-red-900 rounded-lg">
-                        ERRORE: <span id="errorValue"></span>
+                        ERRORE: <span id="errorMessage"></span>
                     </div>
                     <div id="saveMessageSuccess" class="hidden bg-green-200 py-2 pl-2 my-2 text-green-900 rounded-lg">
                         Transazione completata con successo. Attendi l'aggiornamento del Messaggio.<br/>
-                        ID Transazione: <span id="successValue"></span>
+                        ID Transazione: <span id="successMessage"></span>
                     </div>
                   </form>
             </div>

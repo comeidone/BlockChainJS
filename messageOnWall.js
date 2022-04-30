@@ -20,77 +20,79 @@ contractMOW.methods.readMessage().call()
         document.querySelector("#timeMessage").innerText=new Date(value[3]*1000).toLocaleDateString("it-IT") +" "+new Date(value[3]*1000).toLocaleTimeString("it-IT");
     });
 
-/*
+
 //click su Salva
-document.querySelector("#saveButton").addEventListener('click', async () => {
-    let newValueBlock = document.querySelector("#newValueBlock").value;
-    let oldValueBlock = document.querySelector("#valueBlock").innerText;
+document.querySelector("#saveMessageButton").addEventListener('click', async () => {
+    let newMessageText = document.querySelector("#newMessageBlock").value;
+    let newAuthorText = document.querySelector("#newAuthorBlock").value;
 
     //verifica validità valore inserito
-    if(newValueBlock=="" || newValueBlock<0){
-        document.querySelector("#saveValueError").classList.remove('hidden');
-        document.querySelector('#errorValue').innerText = "Inserisci un valore numerico maggiore o uguale a 0";
-        return;
-    } else if (newValueBlock==oldValueBlock){
-        document.querySelector("#saveValueError").classList.remove('hidden');
-        document.querySelector('#errorValue').innerText = "Stai provando ad inserire lo stesso valore. Risparmia i tuoi ETH!";
+    if(newMessageText==""){
+        document.querySelector("#saveMessageError").classList.remove('hidden');
+        document.querySelector('#errorMessage').innerText = "Inserisci un messaggio valido";
         return;
     }
+    if(newAuthorText==""){
+        newAuthorText="Anonymous";
+    }
 
-    document.querySelector("#saveButton").classList.add('pointer-events-none');
-    document.querySelector("#saveButton").classList.remove('bg-blue-500');
-    document.querySelector("#saveButton").classList.remove('hover:bg-blue-700');
-    document.querySelector("#saveButton").classList.add('bg-blue-200');
-    document.querySelector("#saveText").classList.add('hidden');
-    document.querySelector("#loadSpinner").classList.remove('hidden');
-    document.querySelector("#processingText").classList.remove('hidden');
-    document.querySelector("#saveValueSuccess").classList.add('hidden');
-    document.querySelector("#saveValueError").classList.add('hidden');
+    document.querySelector("#saveMessageButton").classList.add('pointer-events-none');
+    document.querySelector("#saveMessageButton").classList.remove('bg-blue-500');
+    document.querySelector("#saveMessageButton").classList.remove('hover:bg-blue-700');
+    document.querySelector("#saveMessageButton").classList.add('bg-blue-200');
+    document.querySelector("#saveMessageText").classList.add('hidden');
+    document.querySelector("#messageLoadSpinner").classList.remove('hidden');
+    document.querySelector("#messageProcessingText").classList.remove('hidden');
+    document.querySelector("#saveMessageSuccess").classList.add('hidden');
+    document.querySelector("#saveMessageError").classList.add('hidden');
 
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     const account = accounts[0];
-    let storeValue = web3.eth.abi.encodeFunctionCall({
-        name: 'store',
-        type: 'function',
-        inputs: [
-            {
-                type: 'uint256',
-                name: 'num'
+    let writeMessage = web3.eth.abi.encodeFunctionCall({
+        type: "function",
+        name: "writeMessage",
+        inputs: [{
+                name: "_message",
+                type: "string"
+            }, {
+                name: "_author",
+                type: "string"
             }
         ]
-    }, [newValueBlock]);
+    }, [newMessageText, newAuthorText]);
 
     const transactionParameters = {
         from: account,
-        to: contractAddress,
-        data: storeValue
+        to: contractAddressMOW,
+        value: web3.utils.toHex(web3.utils.toWei('0.00001','ether')),
+        data: writeMessage
     };
 
     const txHash = await ethereum.request({
         method: 'eth_sendTransaction',
         params: [transactionParameters],
     }).then((value) => {
-        document.querySelector("#saveButton").classList.remove('pointer-events-none');
-        document.querySelector("#saveButton").classList.add('bg-blue-500');
-        document.querySelector("#saveButton").classList.add('hover:bg-blue-700');
-        document.querySelector("#saveButton").classList.remove('bg-blue-200');
-        document.querySelector("#saveText").classList.remove('hidden');
-        document.querySelector("#loadSpinner").classList.add('hidden');
-        document.querySelector("#processingText").classList.add('hidden');
-        document.querySelector("#saveValueSuccess").classList.remove('hidden');
-        document.querySelector('#successValue').innerText = value;
+        document.querySelector("#saveMessageButton").classList.remove('pointer-events-none');
+        document.querySelector("#saveMessageButton").classList.add('bg-blue-500');
+        document.querySelector("#saveMessageButton").classList.add('hover:bg-blue-700');
+        document.querySelector("#saveMessageButton").classList.remove('bg-blue-200');
+        document.querySelector("#saveMessageText").classList.remove('hidden');
+        document.querySelector("#messageLoadSpinner").classList.add('hidden');
+        document.querySelector("#messageProcessingText").classList.add('hidden');
+        document.querySelector("#saveMessageSuccess").classList.remove('hidden');
+        document.querySelector('#successMessage').innerText = value;
     }
     ).catch((error) => {
-        document.querySelector("#saveButton").classList.remove('pointer-events-none');
-        document.querySelector("#saveButton").classList.add('bg-blue-500');
-        document.querySelector("#saveButton").classList.add('hover:bg-blue-700');
-        document.querySelector("#saveButton").classList.remove('bg-blue-200');
-        document.querySelector("#saveText").classList.remove('hidden');
-        document.querySelector("#loadSpinner").classList.add('hidden');
-        document.querySelector("#processingText").classList.add('hidden');
-        document.querySelector("#saveValueError").classList.remove('hidden');
-        document.querySelector('#errorValue').innerText = error.code + " " + error.message;
+        document.querySelector("#saveMessageButton").classList.remove('pointer-events-none');
+        document.querySelector("#saveMessageButton").classList.add('bg-blue-500');
+        document.querySelector("#saveMessageButton").classList.add('hover:bg-blue-700');
+        document.querySelector("#saveMessageButton").classList.remove('bg-blue-200');
+        document.querySelector("#saveMessageText").classList.remove('hidden');
+        document.querySelector("#messageLoadSpinner").classList.add('hidden');
+        document.querySelector("#messageProcessingText").classList.add('hidden');
+        document.querySelector("#saveMessageError").classList.remove('hidden');
+        document.querySelector('#errorMessage').innerText = error.code + " " + error.message;
     });
 
 })
-*/
+
